@@ -1,0 +1,160 @@
+　BattleVoice.jsonファイルの取り扱い方法
+
+# 仕様----------
+audio/voice/actor0(アクター番号)で音声を取得していきます。
+また、actorフォルダの存在しないキャラの場合は、音声を再生しません。
+audio/voice/enemy0(エネミー番号)で音声を取得していきます。
+また、enemyフォルダの存在しないキャラの場合は、音声を再生しません。
+
+
+＞＞用意の例
+audio/voice/actor01/
+とした場合、アクター１番が攻撃したら、
+audio/voice/actor01/attack（パターン）を取得してゲームで再生します。
+
+audio/voice/enemy01/
+とした場合、エネミー１番がスキルを使用したら、
+audio/voice/enemy01/skill（パターン）を取得してゲームで再生します。
+
+複数用意するほどバリエーションは豊富になる反面、
+処理負荷の原因になるため、3～5個を目安にするといいでしょう。
+
+ファイルをメモ帳で開くとこうなっています。
+編集にはJS環境を用意することをお勧めします。
+
+{"voices":[
+[{"name":"attack1","pan":0,"pitch":100,"volume":100},{"name":"attack2","pan":0,"pitch":100,"volume":100},{"name":"attack3","pan":0,"pitch":100,"volume":100}],
+[{"name":"guard1","pan":0,"pitch":100,"volume":100},{"name":"guard2","pan":0,"pitch":100,"volume":100},{"name":"guard3","pan":0,"pitch":100,"volume":100}],
+[{"name":"skill1","pan":0,"pitch":100,"volume":100},{"name":"skill2","pan":0,"pitch":100,"volume":100},{"name":"skill3","pan":0,"pitch":100,"volume":100}],
+[{"name":"item1","pan":0,"pitch":100,"volume":100},{"name":"item2","pan":0,"pitch":100,"volume":100},{"name":"item3","pan":0,"pitch":100,"volume":100}],
+[{"name":"critical1","pan":0,"pitch":100,"volume":100},{"name":"critical2","pan":0,"pitch":100,"volume":100},{"name":"critical3","pan":0,"pitch":100,"volume":100}],
+[{"name":"miss1","pan":0,"pitch":100,"volume":100},{"name":"miss2","pan":0,"pitch":100,"volume":100},{"name":"miss3","pan":0,"pitch":100,"volume":100}],
+[{"name":"eva1","pan":0,"pitch":100,"volume":100},{"name":"eva2","pan":0,"pitch":100,"volume":100},{"name":"eva3","pan":0,"pitch":100,"volume":100}],
+[{"name":"dead1","pan":0,"pitch":100,"volume":100},{"name":"dead2","pan":0,"pitch":100,"volume":100},{"name":"dead3","pan":0,"pitch":100,"volume":100}],
+[{"name":"dying1","pan":0,"pitch":100,"volume":100},{"name":"dying2","pan":0,"pitch":100,"volume":100},{"name":"dying3","pan":0,"pitch":100,"volume":100}],
+[{"name":"damage1","pan":0,"pitch":100,"volume":100},{"name":"damage2","pan":0,"pitch":100,"volume":100},{"name":"damage3","pan":0,"pitch":100,"volume":100}],
+[{"name":"recover1","pan":0,"pitch":100,"volume":100},{"name":"recover2","pan":0,"pitch":100,"volume":100},{"name":"recover3","pan":0,"pitch":100,"volume":100}],
+[{"name":"inbattle1","pan":0,"pitch":100,"volume":100},{"name":"inbattle2","pan":0,"pitch":100,"volume":100},{"name":"inbattle3","pan":0,"pitch":100,"volume":100}],
+[{"name":"endbattle1","pan":0,"pitch":100,"volume":100},{"name":"endbattle2","pan":0,"pitch":100,"volume":100},{"name":"endbattle3","pan":0,"pitch":100,"volume":100}],
+[{"name":"escapefai1","pan":0,"pitch":100,"volume":100},{"name":"escapefai2","pan":0,"pitch":100,"volume":100},{"name":"escapefai2","pan":0,"pitch":100,"volume":100}],
+[{"name":"escapesus1","pan":0,"pitch":100,"volume":100},{"name":"escapesus2","pan":0,"pitch":100,"volume":100},{"name":"escapesus3","pan":0,"pitch":100,"volume":100}],
+[{"name":"spsk","pan":0,"pitch":100,"volume":100}],
+[{"name":"counter1","pan":0,"pitch":100,"volume":100},{"name":"counter2","pan":0,"pitch":100,"volume":100},{"name":"counter3","pan":0,"pitch":100,"volume":100}],
+[{"name":"turn1","pan":0,"pitch":100,"volume":100},{"name":"turn2","pan":0,"pitch":100,"volume":100},{"name":"turn3","pan":0,"pitch":100,"volume":100}],
+[{"name":"state1","pan":0,"pitch":100,"volume":100},{"name":"state2","pan":0,"pitch":100,"volume":100},{"name":"state3","pan":0,"pitch":100,"volume":100}],
+[{"name":"spst","pan":0,"pitch":100,"volume":100}]
+]}
+
+
+上から順番に攻撃、防御、スキル～の順に音声を拾うよう考慮されています。
+
+
+# 候補の追加と削除-------------------------------------------------------------
+
+//削除
+[{"name":"attack1","pan":0,"pitch":100,"volume":100},{"name":"attack2","pan":0,"pitch":100,"volume":100}],
+
+
+//追加
+[{"name":"attack1","pan":0,"pitch":100,"volume":100},{"name":"attack2","pan":0,"pitch":100,"volume":100},{"name":"attack3","pan":0,"pitch":100,"volume":100},{"name":"attack4","pan":0,"pitch":100,"volume":100}],
+
+というように、候補の追加と削除を行います。
+
+
+# 特殊ファイル名について-------------------------------------------------------------
+
+特殊なファイル名の
+
+[{"name":"spsk","pan":0,"pitch":100,"volume":100}],
+[{"name":"spst","pan":0,"pitch":100,"volume":100}],
+
+上記は、プラグイン内部の設定項目 SkillIdarray(StateIdarray(enemy)) に含まれる番号をspsk（spst）の語尾にくっつけて呼び出すので、
+実際にフォルダに入れるファイル名はspsk（スキル番号※例 => spsk2(spst2)）のモノを入れておきます。
+
+
+
+# 名前の変更など-------------------------------------------------------------
+名前の変更は英数字半角で行います。
+
+//攻撃音声の名前を変更する場合の例
+{"name":"attack1","pan":0,"pitch":100,"volume":100}→{"name":"atk1","pan":0,"pitch":100,"volume":100}
+
+# 以下それぞれのライブラリ（並び）-------------------------------------------------------------
+
+{"voices":[
+
+// 攻撃→配列[0]
+[{"name":"attack1","pan":0,"pitch":100,"volume":100}],
+
+// 防御→配列[1]
+[{"name":"guard1","pan":0,"pitch":100,"volume":100}],
+
+// 特技・魔法→配列[2]
+[{"name":"skill1","pan":0,"pitch":100,"volume":100}],
+
+// アイテム使用→配列[3]
+[{"name":"item1","pan":0,"pitch":100,"volume":100}],
+
+// 会心→配列[4]
+[{"name":"critical1","pan":0,"pitch":100,"volume":100}],
+
+// 攻撃にMISS→配列[5]
+[{"name":"miss1","pan":0,"pitch":100,"volume":100}],
+
+// 攻撃を回避→配列[6]
+[{"name":"eva1","pan":0,"pitch":100,"volume":100}],
+
+// 戦闘不能→配列[7]
+[{"name":"dead1","pan":0,"pitch":100,"volume":100}],
+
+// 瀕死でダメージを受ける→配列[8]
+[{"name":"dying1","pan":0,"pitch":100,"volume":100}],
+
+// ダメージを受ける→配列[9]
+[{"name":"damage1","pan":0,"pitch":100,"volume":100}],
+
+// 回復を受けたときの相槌→配列[10]
+[{"name":"recover1","pan":0,"pitch":100,"volume":100}],
+
+// 戦闘開始→配列[11]
+[{"name":"inbattle1","pan":0,"pitch":100,"volume":100}],
+
+// 戦闘終了→配列[12]
+[{"name":"endbattle1","pan":0,"pitch":100,"volume":100}],
+
+// 逃走失敗→配列[13]
+[{"name":"escapefai1","pan":0,"pitch":100,"volume":100}],
+
+// 逃走成功→配列[14]
+[{"name":"escapesus1","pan":0,"pitch":100,"volume":100}],
+
+// 指定スキル音声→配列[15]
+[{"name":"spsk","pan":0,"pitch":100,"volume":100}],
+
+// 反撃→配列[16]
+[{"name":"counter1","pan":0,"pitch":100,"volume":100}],
+
+// ターン→配列[17]
+[{"name":"turn1","pan":0,"pitch":100,"volume":100}],
+
+// ステートダメージ→配列[18]
+[{"name":"state1","pan":0,"pitch":100,"volume":100}],
+
+// 指定ステートダメージ→配列[19]
+[{"name":"spst","pan":0,"pitch":100,"volume":100}],
+
+]}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

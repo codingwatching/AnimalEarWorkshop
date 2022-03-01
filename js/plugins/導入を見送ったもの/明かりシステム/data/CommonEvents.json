@@ -1,0 +1,7 @@
+[
+null,
+{"id":1,"list":[{"code":101,"indent":0,"parameters":["",0,0,2]},{"code":401,"indent":0,"parameters":["You light the torch"]},{"code":356,"indent":0,"parameters":["Fire radius 100 #FFCC00"]},{"code":0,"indent":0,"parameters":[]}],"name":"Light torch","switchId":1,"trigger":0},
+{"id":2,"list":[{"code":111,"indent":0,"parameters":[0,3,0]},{"code":121,"indent":1,"parameters":[3,3,1]},{"code":0,"indent":1,"parameters":[]},{"code":411,"indent":0,"parameters":[]},{"code":121,"indent":1,"parameters":[3,3,0]},{"code":0,"indent":1,"parameters":[]},{"code":412,"indent":0,"parameters":[]},{"code":111,"indent":0,"parameters":[0,3,0]},{"code":356,"indent":1,"parameters":["Flashlight on 8 12 #FFFFFF"]},{"code":101,"indent":1,"parameters":["",0,0,2]},{"code":401,"indent":1,"parameters":["You turn the flashlight on"]},{"code":0,"indent":1,"parameters":[]},{"code":411,"indent":0,"parameters":[]},{"code":356,"indent":1,"parameters":["Flashlight off"]},{"code":101,"indent":1,"parameters":["",0,0,2]},{"code":401,"indent":1,"parameters":["You turn the flashlight off"]},{"code":0,"indent":1,"parameters":[]},{"code":412,"indent":0,"parameters":[]},{"code":0,"indent":0,"parameters":[]}],"name":"Light flashlight","switchId":1,"trigger":0},
+{"id":3,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
+{"id":4,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0}
+]
